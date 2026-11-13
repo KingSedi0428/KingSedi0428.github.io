@@ -2,17 +2,155 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="theme-color" content="#14111f">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Your Name | Developer</title>
+  <title>Mosedi Mathabatha | Developer Portfolio</title>
+  <meta name="description" content="Computer Science graduate building for the web, AI/ML and the cloud.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: Arial, sans-serif; max-width: 600px; margin: 60px auto; padding: 0 20px; text-align: center; color: #222; }
-    h1 { color: #4f46e5; }
+    :root {
+      color-scheme: dark;
+      --bg: #14111f;
+      --ink: #f1ecfa;
+      --muted: #a9a0c0;
+      --mint: #1f3a32;
+      --peach: #ffb08f;
+      --line: #2d2740;
+      --on-peach: #23183a;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    main { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 72px 24px 48px; }
+    h1, h2 { font-family: "Fraunces", Georgia, "Times New Roman", serif; line-height: 1.15; margin: 0; }
+    h1 { font-size: clamp(2.5rem, 8vw, 4.2rem); font-weight: 700; letter-spacing: -0.02em; }
+    h2 { font-size: 1.8rem; font-weight: 600; margin-bottom: 20px; }
+    h3 { font-size: 1rem; margin: 0 0 8px; }
+    p { margin: 0 0 14px; max-width: 60ch; }
+    a { color: var(--ink); text-decoration-color: var(--peach); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+    a:hover { background: var(--peach); color: var(--on-peach); text-decoration: none; }
+    a:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+    section { margin-top: 72px; }
+
+    .hero p.lead { font-size: 1.25rem; margin-top: 24px; }
+    .hero .wave { display: inline-block; background: var(--peach); border-radius: 999px; padding: 4px 16px; margin-bottom: 20px; color: var(--on-peach); font-weight: 500; font-size: 0.95rem; }
+
+    .skills { display: grid; gap: 22px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+    .chips li { background: var(--mint); color: #d7efe2; border-radius: 999px; padding: 5px 16px; font-size: 0.95rem; }
+
+    .projects { list-style: none; margin: 0; padding: 0; }
+    .projects li { padding: 22px 0; border-top: 1px solid var(--line); }
+    .projects li:last-child { border-bottom: 1px solid var(--line); }
+    .projects h3 { font-family: "Fraunces", Georgia, serif; font-size: 1.3rem; font-weight: 600; margin-bottom: 6px; }
+    .projects .tech { color: var(--muted); font-size: 0.92rem; margin: 0; }
+
+    .contact ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 28px; }
+    footer { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 24px; color: var(--muted); font-size: 0.9rem; }
+    /* Floating background orbs */
+    .orbs { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+    .orbs span { position: absolute; border-radius: 50%; filter: blur(60px); animation: drift 14s ease-in-out infinite; }
+    .orbs span:nth-child(1) { width: 320px; height: 320px; background: #7a5af8; opacity: .3; top: -80px; right: -60px; }
+    .orbs span:nth-child(2) { width: 260px; height: 260px; background: var(--peach); opacity: .16; bottom: 10%; left: -80px; animation-duration: 18s; animation-delay: -5s; }
+    .orbs span:nth-child(3) { width: 200px; height: 200px; background: #4fb286; opacity: .18; top: 45%; right: 8%; animation-duration: 16s; animation-delay: -9s; }
+
+    /* Page-load entrance and gentle floating */
+    .hero > * { animation: float-in .9s cubic-bezier(.2,.7,.2,1) both; }
+    .hero > :nth-child(2) { animation-delay: .15s; }
+    .hero > :nth-child(3) { animation-delay: .3s; }
+    .hero > :nth-child(4) { animation-delay: .45s; }
+    .hero .wave { animation: float-in .9s cubic-bezier(.2,.7,.2,1) both, bob 4s ease-in-out 1.2s infinite; }
+    main > section { animation: float-in .9s cubic-bezier(.2,.7,.2,1) .6s both; }
+    .chips li:nth-child(odd) { animation: bob 5s ease-in-out infinite; }
+    .chips li:nth-child(even) { animation: bob 5s ease-in-out -2.5s infinite; }
+
+    @keyframes float-in { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+    @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+    @keyframes drift { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(30px, -40px); } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; } }
   </style>
 </head>
 <body>
-  <h1>👋 Hi, I'm Your Name!</h1>
-  <p>Computer Science graduate who loves web development, AI/ML and cloud computing.</p>
-  <p>Hardworking, calm under pressure, and always on time.</p>
-  <p><a href="https://github.com/yourusername">My GitHub</a></p>
+  <div class="orbs" aria-hidden="true"><span></span><span></span><span></span></div>
+  <main>
+    <header class="hero">
+      <span class="wave">👋 Welcome to my corner of the internet</span>
+      <h1>Hi, I’m Mosedi Mathabatha.</h1>
+      <p class="lead">I’m a Computer Science graduate from the University of Limpopo, focused on web development, artificial intelligence, and cloud computing.</p>
+      <p>I approach problems methodically and perform well under pressure. I value collaboration, take ownership of my work, and am committed to seeing complex projects through to completion.</p>
+    </header>
+
+    <section id="skills">
+      <h2>What I work with</h2>
+      <div class="skills">
+        <div>
+          <h3>Web development</h3>
+          <ul class="chips"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Full-stack development</li></ul>
+        </div>
+        <div>
+          <h3>Programming languages</h3>
+          <ul class="chips"><li>Python</li><li>C++</li></ul>
+        </div>
+        <div>
+          <h3>AI, data and cloud</h3>
+          <ul class="chips"><li>Machine learning</li><li>Data analysis</li><li>Cloud computing</li><li>Microsoft ecosystem</li></ul>
+        </div>
+        <div>
+          <h3>How I work</h3>
+          <ul class="chips"><li>Collaboration</li><li>Problem-solving</li><li>Software development</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Things I’ve built</h2>
+      <ul class="projects">
+        <li>
+          <h3>AI Journey Damage Detection System</h3>
+          <p>An AI system that detects damage automatically.</p>
+        </li>
+        <li>
+          <h3>Fraud Detection using ML</h3>
+          <p>A machine learning project that spots fraudulent activity in data.</p>
+        </li>
+        <li>
+          <h3>Bank App</h3>
+          <p>A banking application built to handle everyday account tasks.</p>
+        </li>
+        <li>
+          <h3>Large Language Model from Scratch</h3>
+          <p>A language model built from the ground up to learn how LLMs work under the hood.</p>
+        </li>
+      </ul>
+      <p style="margin-top:20px">See the code for these and more on <a href="https://github.com/KingSedi0428">my GitHub</a>.</p>
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+      <h3>Bachelor of Science in Computer Science</h3>
+      <p>University of Limpopo, Turfloop</p>
+      <p>Languages: English (C2, proficient) and Afrikaans (B2, upper intermediate).</p>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>Let’s work together</h2>
+      <p>I’m always happy to chat about projects, internships, or ideas. Send me a message.</p>
+      <ul>
+        <li><a href="mailto:mosedi0428@gmail.com">mosedi0428@gmail.com</a></li>
+        <li><a href="https://github.com/KingSedi0428">GitHub</a></li>
+      </ul>
+    </section>
+  </main>
+  <footer>© 2026 Mosedi Mathabatha. Built with love</footer>
 </body>
 </html>
